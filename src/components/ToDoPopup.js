@@ -37,6 +37,12 @@ const TodoPopup = ({
           className="rounded-lg bg-white shadow"
         >
           <div className="p-6">
+            <label
+              for="title"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Title *
+            </label>
             <input
               required
               type="text"
@@ -52,6 +58,12 @@ const TodoPopup = ({
             />
           </div>
           <div className="p-6">
+            <label
+              for="summary"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Summary *
+            </label>
             <input
               required
               type="text"

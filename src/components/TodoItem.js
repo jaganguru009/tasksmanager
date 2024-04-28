@@ -17,11 +17,14 @@ const TodoItem = ({
     let listOfItems = [...toDos];
     listOfItems.splice(index, 1);
     setToDos(...listOfItems);
+    localStorage.setItem("todos", JSON.stringify(listOfItems));
   };
 
   const handleMarkDone = () => {
-    toDos[index]["completed"] = !toDos[index]["completed"];
-    setToDos(toDos);
+    let listOfItems = [...toDos];
+    listOfItems[index]["completed"] = !listOfItems[index]["completed"];
+    setToDos(listOfItems);
+    localStorage.setItem("listOfItems mark done", JSON.stringify(listOfItems));
   };
 
   return (
@@ -33,11 +36,11 @@ const TodoItem = ({
       )}
     >
       <span
-        className="font-normal text-gray-700"
+        className="text-gray-900 font-semibold"
         dangerouslySetInnerHTML={{
           __html:
             searchTerm !== ""
-              ? item.value.replace(
+              ? item.title.replace(
                   searchTerm,
                   `<span class="bg-blue-100 font-bold">${searchTerm}</span>`
                 )

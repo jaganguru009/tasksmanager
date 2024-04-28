@@ -5,7 +5,7 @@ import SearchIcon from "./assets/icons/SearchIcon";
 import AddIcon from "./assets/icons/AddIcon";
 import TodoPopup from "./components/ToDoPopup";
 import TodoItem from "./components/TodoItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 let basicToDoItem = {
   index: null,
@@ -19,13 +19,23 @@ function App() {
   const [showPopup, setShowPopUp] = useState(false);
   const [todos, setToDos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  useEffect(() => {
+    let list = localStorage.getItem("todos");
+    if (list && typeof list === "string") {
+      list = JSON.parse(list);
+    }
+    console.log(`list use effect ${JSON.stringify(list)}`);
+    if (list && list.length > 0) setToDos(list);
+  }, []);
 
   const handleToUpdate = (toDoData) => {
     console.log(`todo data`, toDoData);
+
     setToDos(toDoData);
+    localStorage.setItem("todos", JSON.stringify(toDoData));
   };
   const getTodoItem = (index, item) => {
-    console.log(`index`, index, item);
+    console.log(`index getTodoItem`, index, item);
     return (
       <TodoItem
         searchTerm={searchTerm}
