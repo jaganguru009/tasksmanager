@@ -18,19 +18,36 @@ function App() {
   const [selectedToDo, setSelectedToDo] = useState(basicToDoItem);
   const [showPopup, setShowPopUp] = useState(false);
   const [todos, setToDos] = useState([]);
+  const [filteredTodos, setFilteredTodos] = useState([]);
+  const [activeFilter, setActiveFilter] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   useEffect(() => {
     let list = localStorage.getItem("todos");
     if (list && typeof list === "string") {
       list = JSON.parse(list);
     }
-
-    if (list && list.length > 0) setToDos(list);
+    console.log(`list `, JSON.stringify(list));
+    if (list && list.length > 0) {
+      setToDos(list);
+      handleStatusFilter("All", list);
+    }
   }, []);
 
+  const handleStatusFilter = (status, list) => {
+    let filteredToDos = list ? list : [...todos];
+    if (status !== "All") {
+      filteredToDos = filteredToDos.filter(
+        (toDoItem) => toDoItem.isCompleted == status
+      );
+    }
+    console.log(`filteredToDos`, JSON.stringify(filteredToDos));
+    setFilteredTodos(filteredToDos);
+    setActiveFilter(status);
+  };
   const handleToUpdate = (toDoData) => {
     setToDos(toDoData);
     localStorage.setItem("todos", JSON.stringify(toDoData));
+    handleStatusFilter(activeFilter);
   };
   const getTodoItem = (index, item) => {
     if (searchTerm) {
@@ -47,7 +64,7 @@ function App() {
         searchTerm={searchTerm}
         item={item}
         index={index}
-        toDos={todos}
+        toDos={filteredTodos}
         setToDos={setToDos}
         setSelectedToDo={setSelectedToDo}
         setShowPopUp={setShowPopUp}
@@ -94,28 +111,60 @@ function App() {
                 <SearchIcon />
               </button>
             </div>
-
+          </div>
+        </div>
+        <div className="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10 mt-4">
+          <div className="sm:flex items-center justify-between">
+            <div className="flex items-center">
+              <a
+                onClick={() => {
+                  handleStatusFilter("All");
+                }}
+                className="rounded-full focus:outline-none focus:ring-2  focus:bg-indigo-50 focus:ring-indigo-800"
+              >
+                <div className="py-2 px-8 bg-indigo-100 text-indigo-700 rounded-full">
+                  <p>All</p>
+                </div>
+              </a>
+              <a
+                onClick={() => {
+                  handleStatusFilter(true);
+                }}
+                className="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8"
+              >
+                <div className="py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full ">
+                  <p>Done</p>
+                </div>
+              </a>
+              <a
+                className="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8"
+                onClick={() => {
+                  handleStatusFilter(false);
+                }}
+              >
+                <div className="py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full ">
+                  <p>Pending</p>
+                </div>
+              </a>
+            </div>
             <button
-              type="button"
               onClick={() => {
                 setShowPopUp(true);
                 setSelectedToDo(basicToDoItem);
               }}
               title="Add New Item"
-              className={clsx(
-                "rounded-lg bg-emerald-700 px-4 py-2.5",
-                "font-medium text-white",
-                "hover:bg-emerald-800 focus:outline-none focus:ring-4 focus:ring-emerald-300"
-              )}
+              className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded"
             >
-              <AddIcon />
+              <p className="text-sm font-medium leading-none text-white">
+                Add Task
+              </p>
             </button>
           </div>
-        </div>
-        <div className="py-3">
-          {todos &&
-            todos.length > 0 &&
-            todos.map((item, index) => getTodoItem(index, item))}
+          <div className="py-3">
+            {filteredTodos &&
+              filteredTodos.length > 0 &&
+              filteredTodos.map((item, index) => getTodoItem(index, item))}
+          </div>
         </div>
       </div>
     </div>

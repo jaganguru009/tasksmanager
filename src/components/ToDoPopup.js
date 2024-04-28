@@ -17,6 +17,7 @@ const TodoPopup = ({
       tags: event.target.tags.value ? event.target.tags.value : "",
       dueDate: event.target.dueDate.value ? event.target.dueDate.value : null,
       progress: event.target.progress.value ? event.target.progress.value : 0,
+      isCompleted: toDoItem.isCompleted ? toDoItem.isCompleted : false,
     };
     if (index === null) {
       listOfItems.push(newToDo);

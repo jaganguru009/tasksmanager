@@ -21,10 +21,11 @@ const TodoItem = ({
   };
 
   const handleMarkDone = () => {
+    debugger;
     let listOfItems = [...toDos];
-    listOfItems[index]["completed"] = !listOfItems[index]["completed"];
+    listOfItems[index].isCompleted = !listOfItems[index].isCompleted;
     setToDos(listOfItems);
-    localStorage.setItem("listOfItems mark done", JSON.stringify(listOfItems));
+    localStorage.setItem("todos", JSON.stringify(listOfItems));
   };
 
   return (
@@ -136,12 +137,12 @@ const TodoItem = ({
         >
           <EditIcon />
         </button>
-
+        {console.log(item.isCompleted)}
         <button
           onClick={handleMarkDone}
           type="button"
           className={clsx(
-            item.completed ? "bg-emerald-700" : "bg-gray-400",
+            item.isCompleted ? "bg-emerald-700" : "bg-gray-400",
             "flex h-10 w-10 items-center justify-center rounded-lg",
             "hover:bg-emerald-800 focus:outline-none focus:ring-4 focus:ring-emerald-300"
           )}
