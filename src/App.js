@@ -68,6 +68,8 @@ function App() {
         setToDos={setToDos}
         setSelectedToDo={setSelectedToDo}
         setShowPopUp={setShowPopUp}
+        handleStatusFilter={handleStatusFilter}
+        activeFilter={activeFilter}
       />
     );
   };
@@ -122,7 +124,13 @@ function App() {
                 }}
                 className="rounded-full focus:outline-none focus:ring-2  focus:bg-indigo-50 focus:ring-indigo-800"
               >
-                <div className="py-2 px-8 bg-indigo-100 text-indigo-700 rounded-full">
+                <div
+                  className={`py-2 px-8 ${
+                    activeFilter == "All"
+                      ? " bg-indigo-100 text-indigo-700 rounded-full "
+                      : ""
+                  }`}
+                >
                   <p>All</p>
                 </div>
               </a>
@@ -132,7 +140,13 @@ function App() {
                 }}
                 className="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8"
               >
-                <div className="py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full ">
+                <div
+                  className={`py-2 px-8 ${
+                    activeFilter === true
+                      ? " bg-indigo-100 text-indigo-700 rounded-full "
+                      : ""
+                  }`}
+                >
                   <p>Done</p>
                 </div>
               </a>
@@ -142,7 +156,13 @@ function App() {
                   handleStatusFilter(false);
                 }}
               >
-                <div className="py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full ">
+                <div
+                  className={`py-2 px-8 ${
+                    activeFilter === false
+                      ? " bg-indigo-100 text-indigo-700 rounded-full "
+                      : ""
+                  }`}
+                >
                   <p>Pending</p>
                 </div>
               </a>

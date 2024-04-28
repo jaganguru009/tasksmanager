@@ -11,21 +11,23 @@ const TodoItem = ({
   setToDos,
   setSelectedToDo,
   setShowPopUp,
+  handleStatusFilter,
+  activeFilter,
 }) => {
   const handleRemoveTodoItem = () => {
-    debugger;
     let listOfItems = [...toDos];
     listOfItems.splice(index, 1);
     setToDos(listOfItems);
     localStorage.setItem("todos", JSON.stringify(listOfItems));
+    handleStatusFilter(activeFilter, listOfItems);
   };
 
   const handleMarkDone = () => {
-    debugger;
     let listOfItems = [...toDos];
     listOfItems[index].isCompleted = !listOfItems[index].isCompleted;
     setToDos(listOfItems);
     localStorage.setItem("todos", JSON.stringify(listOfItems));
+    handleStatusFilter(activeFilter, listOfItems);
   };
 
   return (
