@@ -16,7 +16,7 @@ const TodoItem = ({
     debugger;
     let listOfItems = [...toDos];
     listOfItems.splice(index, 1);
-    setToDos(...listOfItems);
+    setToDos(listOfItems);
     localStorage.setItem("todos", JSON.stringify(listOfItems));
   };
 

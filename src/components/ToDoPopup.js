@@ -112,6 +112,8 @@ const TodoPopup = ({
             <input
               required
               type="number"
+              min="0"
+              max="100"
               className={clsx(
                 "w-full bg-gray-50 p-3",
                 "rounded-lg border border-gray-300",
