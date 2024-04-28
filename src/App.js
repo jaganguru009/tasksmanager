@@ -1,10 +1,15 @@
 import "./App.css";
+import Heading from "./components/Heading";
 
 function App() {
   return (
-    <h1 className="text-3xl font-bold underline text-red-500">
-      Tailwind working
-    </h1>
+    <div className="flex min-h-screen items-center bg-gray-50">
+      <div className="mx-auto w-full max-w-3xl px-4 py-6">
+        <div id="container" className="flex min-h-screen items-center">
+          <Heading />
+        </div>
+      </div>
+    </div>
   );
 }
 
