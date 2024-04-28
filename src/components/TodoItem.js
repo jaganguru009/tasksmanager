@@ -74,7 +74,7 @@ const TodoItem = ({
                 searchTerm !== ""
                   ? item.title.replace(
                       searchTerm,
-                      `<span className="bg-amber-400 font-bold">${searchTerm}</span>`
+                      `<span class="bg-amber-400 font-bold">${searchTerm}</span>`
                     )
                   : item.title,
             }}
@@ -82,18 +82,23 @@ const TodoItem = ({
         </div>
         <p className="text-gray-700 text-base">
           <span
-            className="text-gray-900 font-semibold"
+            className="text-gray-400 font-semibold text-sm italic"
             dangerouslySetInnerHTML={{
               __html:
                 searchTerm !== ""
                   ? item.summary.replace(
                       searchTerm,
-                      `<span className="bg-amber-400 font-bold italic">${searchTerm}</span>`
+                      `<span class="bg-amber-400 font-bold italic">${searchTerm}</span>`
                     )
                   : item.summary,
             }}
           ></span>
         </p>
+        <div className="text-gray-700 text-base">
+          <p className="mt-1.5">
+            Due Date: <b>{item.dueDate}</b>
+          </p>
+        </div>
       </div>
       <div className="px-6 pt-4 pb-2">
         {item.tags &&
@@ -102,7 +107,18 @@ const TodoItem = ({
               key={`${tag}-${index}`}
               className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
             >
-              #{tag}
+              <span
+                className="text-gray-400 font-semibold text-sm italic"
+                dangerouslySetInnerHTML={{
+                  __html:
+                    searchTerm !== ""
+                      ? tag.replace(
+                          searchTerm,
+                          `<span class="bg-amber-400 font-bold italic">${searchTerm}</span>`
+                        )
+                      : tag,
+                }}
+              ></span>
             </span>
           ))}
       </div>

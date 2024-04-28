@@ -33,13 +33,15 @@ function App() {
     localStorage.setItem("todos", JSON.stringify(toDoData));
   };
   const getTodoItem = (index, item) => {
-    if (
-      searchTerm &&
-      (!item.title.includes(searchTerm) ||
-        !item.summary.includes(searchTerm) ||
-        !item.tags.split(",").includes(searchTerm))
-    )
-      return null;
+    if (searchTerm) {
+      let found = Object.keys(item).find((key) =>
+        item[key].toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      if (!found) {
+        return null;
+      }
+    }
+
     return (
       <TodoItem
         searchTerm={searchTerm}

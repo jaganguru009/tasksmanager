@@ -15,6 +15,7 @@ const TodoPopup = ({
       title: event.target.title.value ? event.target.title.value : "",
       summary: event.target.summary.value ? event.target.summary.value : "",
       tags: event.target.tags.value ? event.target.tags.value : "",
+      dueDate: event.target.dueDate.value ? event.target.dueDate.value : "",
     };
     if (index === null) {
       listOfItems.push(newToDo);
@@ -78,6 +79,25 @@ const TodoPopup = ({
               placeholder="Summary"
               name="summary"
               defaultValue={toDoItem && toDoItem.summary}
+            />
+          </div>
+          <div className="p-6">
+            <label
+              htmlFor="dueDate"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Due Date
+            </label>
+            <input
+              type="date"
+              className={clsx(
+                "w-full bg-gray-50 p-4",
+                "rounded-lg border border-gray-300",
+                "text-gray-900",
+                "focus:border-blue-500 focus:ring-blue-500"
+              )}
+              name="dueDate"
+              defaultValue={toDoItem && toDoItem.dueDate}
             />
           </div>
           <div className="p-6">
