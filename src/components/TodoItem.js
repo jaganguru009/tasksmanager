@@ -35,35 +35,6 @@ const TodoItem = ({
         "rounded-lg border border-gray-200 shadow"
       )}
     >
-      {/* <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-        <span
-          className="text-gray-900 font-semibold"
-          dangerouslySetInnerHTML={{
-            __html:
-              searchTerm !== ""
-                ? item.title.replace(
-                    searchTerm,
-                    `<span className="bg-yellow-100 font-bold">${searchTerm}</span>`
-                  )
-                : item.title,
-          }}
-        ></span>
-      </h5>
-      <p className="font-normal text-gray-700 dark:text-gray-400">
-        <span
-          className="text-gray-900 font-semibold"
-          dangerouslySetInnerHTML={{
-            __html:
-              searchTerm !== ""
-                ? item.summary.replace(
-                    searchTerm,
-                    `<span className="bg-yellow-100 font-bold">${searchTerm}</span>`
-                  )
-                : item.summary,
-          }}
-        ></span>
-      </p> */}
-
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">
           {" "}
@@ -94,10 +65,8 @@ const TodoItem = ({
             }}
           ></span>
         </p>
-        <div className="text-gray-700 text-base">
-          <p className="mt-1.5">
-            Due Date: <b>{item.dueDate}</b>
-          </p>
+        <div>
+          <p className="mt-2.5">Due Date: {item.dueDate}</p>
         </div>
       </div>
       <div className="px-6 pt-4 pb-2">
@@ -116,11 +85,30 @@ const TodoItem = ({
                           searchTerm,
                           `<span class="bg-amber-400 font-bold italic">${searchTerm}</span>`
                         )
-                      : tag,
+                      : `#${tag}`,
                 }}
               ></span>
             </span>
           ))}
+        {item.progress && (
+          <div className="mt-2.5 max-w-40">
+            <div className="mb-1 text-base font-medium text-green-700 dark:text-green-500">
+              Progress
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700">
+              <div
+                className={`${
+                  item.progress > 0 && item.progress <= 50
+                    ? "bg-red-500"
+                    : item.progress > 50 && item.progress < 100
+                    ? "bg-yellow-500"
+                    : "bg-green-600"
+                } h-2.5 rounded-full`}
+                style={{ width: `${item.progress}%` }}
+              ></div>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="flex gap-2">

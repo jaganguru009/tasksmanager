@@ -15,7 +15,8 @@ const TodoPopup = ({
       title: event.target.title.value ? event.target.title.value : "",
       summary: event.target.summary.value ? event.target.summary.value : "",
       tags: event.target.tags.value ? event.target.tags.value : "",
-      dueDate: event.target.dueDate.value ? event.target.dueDate.value : "",
+      dueDate: event.target.dueDate.value ? event.target.dueDate.value : null,
+      progress: event.target.progress.value ? event.target.progress.value : 0,
     };
     if (index === null) {
       listOfItems.push(newToDo);
@@ -38,7 +39,7 @@ const TodoPopup = ({
           onSubmit={handleEditTodoItem}
           className="rounded-lg bg-white shadow"
         >
-          <div className="p-6">
+          <div className="p-3">
             <label
               htmlFor="title"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -49,7 +50,7 @@ const TodoPopup = ({
               required
               type="text"
               className={clsx(
-                "w-full bg-gray-50 p-4",
+                "w-full bg-gray-50 p-3",
                 "rounded-lg border border-gray-300",
                 "text-gray-900",
                 "focus:border-blue-500 focus:ring-blue-500"
@@ -60,7 +61,7 @@ const TodoPopup = ({
             />
           </div>
 
-          <div className="p-6">
+          <div className="p-3">
             <label
               htmlFor="summary"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -71,7 +72,7 @@ const TodoPopup = ({
               required
               type="text"
               className={clsx(
-                "w-full bg-gray-50 p-4",
+                "w-full bg-gray-50 p-3",
                 "rounded-lg border border-gray-300",
                 "text-gray-900",
                 "focus:border-blue-500 focus:ring-blue-500"
@@ -81,17 +82,18 @@ const TodoPopup = ({
               defaultValue={toDoItem && toDoItem.summary}
             />
           </div>
-          <div className="p-6">
+          <div className="p-3">
             <label
               htmlFor="dueDate"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              Due Date
+              Due Date *
             </label>
             <input
+              required
               type="date"
               className={clsx(
-                "w-full bg-gray-50 p-4",
+                "w-full bg-gray-50 p-3",
                 "rounded-lg border border-gray-300",
                 "text-gray-900",
                 "focus:border-blue-500 focus:ring-blue-500"
@@ -100,7 +102,27 @@ const TodoPopup = ({
               defaultValue={toDoItem && toDoItem.dueDate}
             />
           </div>
-          <div className="p-6">
+          <div className="p-3">
+            <label
+              htmlFor="dueDate"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Completion Percentage *
+            </label>
+            <input
+              required
+              type="number"
+              className={clsx(
+                "w-full bg-gray-50 p-3",
+                "rounded-lg border border-gray-300",
+                "text-gray-900",
+                "focus:border-blue-500 focus:ring-blue-500"
+              )}
+              name="progress"
+              defaultValue={toDoItem && toDoItem.progress}
+            />
+          </div>
+          <div className="p-3">
             <label
               htmlFor="tags"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -110,7 +132,7 @@ const TodoPopup = ({
             <input
               type="text"
               className={clsx(
-                "w-full bg-gray-50 p-4",
+                "w-full bg-gray-50 p-3",
                 "rounded-lg border border-gray-300",
                 "text-gray-900",
                 "focus:border-blue-500 focus:ring-blue-500"
