@@ -8,8 +8,7 @@ const TodoPopup = ({
   todos,
   handleToUpdate,
 }) => {
-  const [todoValue, setTodoValue] = useState(toDoItem ? toDoItem : {});
-
+  const [listOfItems, setlistOfItemss] = useState(todos ? todos : []);
   const handleEditTodoItem = (event) => {
     event.preventDefault();
     let newToDo = {
@@ -17,11 +16,11 @@ const TodoPopup = ({
       summary: event.target.summary.value ? event.target.summary.value : "",
     };
     if (index === null) {
-      todos.push(newToDo);
+      listOfItems.push(newToDo);
     } else {
-      todos[index] = newToDo;
+      listOfItems[index] = newToDo;
     }
-    handleToUpdate(todos);
+    handleToUpdate(listOfItems);
     setShowPopUp(false);
   };
 

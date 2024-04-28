@@ -4,6 +4,7 @@ import clsx from "clsx";
 import SearchIcon from "./assets/icons/SearchIcon";
 import AddIcon from "./assets/icons/AddIcon";
 import TodoPopup from "./components/ToDoPopup";
+import TodoItem from "./components/TodoItem";
 import { useState } from "react";
 
 let basicToDoItem = {
@@ -17,10 +18,25 @@ function App() {
   const [selectedToDo, setSelectedToDo] = useState(basicToDoItem);
   const [showPopup, setShowPopUp] = useState(false);
   const [todos, setToDos] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleToUpdate = (toDoData) => {
     console.log(`todo data`, toDoData);
     setToDos(toDoData);
+  };
+  const getTodoItem = (index, item) => {
+    console.log(`index`, index, item);
+    return (
+      <TodoItem
+        searchTerm={searchTerm}
+        item={item}
+        index={index}
+        toDos={todos}
+        setToDos={setToDos}
+        setSelectedToDo={setSelectedToDo}
+        setShowPopUp={setShowPopUp}
+      />
+    );
   };
   return (
     <div className="flex min-h-screen items-center bg-gray-50">
@@ -47,6 +63,8 @@ function App() {
                   "focus:border-blue-500 focus:ring-blue-500"
                 )}
                 placeholder="Search Todos"
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
               />
               <button
                 type="button"
@@ -76,6 +94,11 @@ function App() {
               <AddIcon />
             </button>
           </div>
+        </div>
+        <div className="py-3">
+          {todos &&
+            todos.length > 0 &&
+            todos.map((item, index) => getTodoItem(index, item))}
         </div>
       </div>
     </div>
