@@ -10,6 +10,7 @@ const TodoPopup = ({
 }) => {
   const [listOfItems, setlistOfItemss] = useState(todos ? todos : []);
   const handleEditTodoItem = (event) => {
+    console.log(`event  summary`, event);
     event.preventDefault();
     let newToDo = {
       title: event.target.title.value ? event.target.title.value : "",
@@ -100,12 +101,13 @@ const TodoPopup = ({
                 "focus:border-blue-500 focus:ring-blue-500"
               )}
               name="dueDate"
+              title="Due Date"
               defaultValue={toDoItem && toDoItem.dueDate}
             />
           </div>
           <div className="p-3">
             <label
-              htmlFor="dueDate"
+              htmlFor="progress"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Completion Percentage *
@@ -115,6 +117,7 @@ const TodoPopup = ({
               type="number"
               min="0"
               max="100"
+              title="Progress"
               className={clsx(
                 "w-full bg-gray-50 p-3",
                 "rounded-lg border border-gray-300",
@@ -134,6 +137,7 @@ const TodoPopup = ({
             </label>
             <input
               type="text"
+              title="Assign some tags to the tasks"
               className={clsx(
                 "w-full bg-gray-50 p-3",
                 "rounded-lg border border-gray-300",

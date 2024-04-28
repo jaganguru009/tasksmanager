@@ -117,8 +117,9 @@ function App() {
         </div>
         <div className="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10 mt-4">
           <div className="sm:flex items-center justify-between">
-            <div className="flex items-center">
+            <div className="flex items-center cursor-pointer">
               <a
+                title="All ToDos"
                 onClick={() => {
                   handleStatusFilter("All");
                 }}
@@ -135,6 +136,7 @@ function App() {
                 </div>
               </a>
               <a
+                title="Completed ToDos"
                 onClick={() => {
                   handleStatusFilter(true);
                 }}
@@ -151,6 +153,7 @@ function App() {
                 </div>
               </a>
               <a
+                title="Pending ToDos"
                 className="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8"
                 onClick={() => {
                   handleStatusFilter(false);
