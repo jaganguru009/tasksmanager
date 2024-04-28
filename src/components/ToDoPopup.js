@@ -14,6 +14,7 @@ const TodoPopup = ({
     let newToDo = {
       title: event.target.title.value ? event.target.title.value : "",
       summary: event.target.summary.value ? event.target.summary.value : "",
+      tags: event.target.tags.value ? event.target.tags.value : "",
     };
     if (index === null) {
       listOfItems.push(newToDo);
@@ -38,8 +39,8 @@ const TodoPopup = ({
         >
           <div className="p-6">
             <label
-              for="title"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              htmlFor="title"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Title *
             </label>
@@ -57,10 +58,11 @@ const TodoPopup = ({
               defaultValue={toDoItem && toDoItem.title}
             />
           </div>
+
           <div className="p-6">
             <label
-              for="summary"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              htmlFor="summary"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Summary *
             </label>
@@ -76,6 +78,25 @@ const TodoPopup = ({
               placeholder="Summary"
               name="summary"
               defaultValue={toDoItem && toDoItem.summary}
+            />
+          </div>
+          <div className="p-6">
+            <label
+              htmlFor="tags"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Tags
+            </label>
+            <input
+              type="text"
+              className={clsx(
+                "w-full bg-gray-50 p-4",
+                "rounded-lg border border-gray-300",
+                "text-gray-900",
+                "focus:border-blue-500 focus:ring-blue-500"
+              )}
+              name="tags"
+              defaultValue={toDoItem && toDoItem.tags}
             />
           </div>
 

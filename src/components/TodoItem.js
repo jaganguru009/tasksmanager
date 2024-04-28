@@ -35,18 +35,78 @@ const TodoItem = ({
         "rounded-lg border border-gray-200 shadow"
       )}
     >
-      <span
-        className="text-gray-900 font-semibold"
-        dangerouslySetInnerHTML={{
-          __html:
-            searchTerm !== ""
-              ? item.title.replace(
-                  searchTerm,
-                  `<span class="bg-blue-100 font-bold">${searchTerm}</span>`
-                )
-              : item.title,
-        }}
-      ></span>
+      {/* <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        <span
+          className="text-gray-900 font-semibold"
+          dangerouslySetInnerHTML={{
+            __html:
+              searchTerm !== ""
+                ? item.title.replace(
+                    searchTerm,
+                    `<span className="bg-yellow-100 font-bold">${searchTerm}</span>`
+                  )
+                : item.title,
+          }}
+        ></span>
+      </h5>
+      <p className="font-normal text-gray-700 dark:text-gray-400">
+        <span
+          className="text-gray-900 font-semibold"
+          dangerouslySetInnerHTML={{
+            __html:
+              searchTerm !== ""
+                ? item.summary.replace(
+                    searchTerm,
+                    `<span className="bg-yellow-100 font-bold">${searchTerm}</span>`
+                  )
+                : item.summary,
+          }}
+        ></span>
+      </p> */}
+
+      <div className="px-6 py-4">
+        <div className="font-bold text-xl mb-2">
+          {" "}
+          <span
+            className="text-gray-900 font-semibold"
+            dangerouslySetInnerHTML={{
+              __html:
+                searchTerm !== ""
+                  ? item.title.replace(
+                      searchTerm,
+                      `<span className="bg-amber-400 font-bold">${searchTerm}</span>`
+                    )
+                  : item.title,
+            }}
+          ></span>
+        </div>
+        <p className="text-gray-700 text-base">
+          <span
+            className="text-gray-900 font-semibold"
+            dangerouslySetInnerHTML={{
+              __html:
+                searchTerm !== ""
+                  ? item.summary.replace(
+                      searchTerm,
+                      `<span className="bg-amber-400 font-bold italic">${searchTerm}</span>`
+                    )
+                  : item.summary,
+            }}
+          ></span>
+        </p>
+      </div>
+      <div className="px-6 pt-4 pb-2">
+        {item.tags &&
+          item.tags.split(",").map((tag, index) => (
+            <span
+              key={`${tag}-${index}`}
+              className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+            >
+              #{tag}
+            </span>
+          ))}
+      </div>
+
       <div className="flex gap-2">
         <button
           onClick={handleRemoveTodoItem}

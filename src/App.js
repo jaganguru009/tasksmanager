@@ -24,18 +24,22 @@ function App() {
     if (list && typeof list === "string") {
       list = JSON.parse(list);
     }
-    console.log(`list use effect ${JSON.stringify(list)}`);
+
     if (list && list.length > 0) setToDos(list);
   }, []);
 
   const handleToUpdate = (toDoData) => {
-    console.log(`todo data`, toDoData);
-
     setToDos(toDoData);
     localStorage.setItem("todos", JSON.stringify(toDoData));
   };
   const getTodoItem = (index, item) => {
-    console.log(`index getTodoItem`, index, item);
+    if (
+      searchTerm &&
+      (!item.title.includes(searchTerm) ||
+        !item.summary.includes(searchTerm) ||
+        !item.tags.split(",").includes(searchTerm))
+    )
+      return null;
     return (
       <TodoItem
         searchTerm={searchTerm}
@@ -93,6 +97,7 @@ function App() {
               type="button"
               onClick={() => {
                 setShowPopUp(true);
+                setSelectedToDo(basicToDoItem);
               }}
               title="Add New Item"
               className={clsx(
