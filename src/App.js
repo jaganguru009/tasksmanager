@@ -26,7 +26,6 @@ function App() {
     if (list && typeof list === "string") {
       list = JSON.parse(list);
     }
-    console.log(`list `, JSON.stringify(list));
     if (list && list.length > 0) {
       setToDos(list);
       handleStatusFilter("All", list);
@@ -40,7 +39,7 @@ function App() {
         (toDoItem) => toDoItem.isCompleted == status
       );
     }
-    console.log(`filteredToDos`, JSON.stringify(filteredToDos));
+
     setFilteredTodos(filteredToDos);
     setActiveFilter(status);
   };
@@ -51,9 +50,12 @@ function App() {
   };
   const getTodoItem = (index, item) => {
     if (searchTerm) {
-      let found = Object.keys(item).find((key) =>
-        item[key].toLowerCase().includes(searchTerm.toLowerCase())
-      );
+      let found = Object.keys(item).find((key) => {
+        return item[key]
+          .toString()
+          .toLowerCase()
+          .includes(searchTerm.toString().toLowerCase());
+      });
       if (!found) {
         return null;
       }
@@ -132,7 +134,9 @@ function App() {
                       : ""
                   }`}
                 >
-                  <p>All</p>
+                  <p>
+                    All {activeFilter === "All" && `(${filteredTodos.length})`}
+                  </p>
                 </div>
               </a>
               <a
@@ -149,7 +153,9 @@ function App() {
                       : ""
                   }`}
                 >
-                  <p>Done</p>
+                  <p>
+                    Done {activeFilter === true && `(${filteredTodos.length})`}
+                  </p>
                 </div>
               </a>
               <a
@@ -166,7 +172,10 @@ function App() {
                       : ""
                   }`}
                 >
-                  <p>Pending</p>
+                  <p>
+                    Pending{" "}
+                    {activeFilter === false && `(${filteredTodos.length})`}
+                  </p>
                 </div>
               </a>
             </div>

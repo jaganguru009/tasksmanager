@@ -139,7 +139,7 @@ const TodoItem = ({
         >
           <EditIcon />
         </button>
-        {console.log(item.isCompleted)}
+
         <button
           onClick={handleMarkDone}
           type="button"

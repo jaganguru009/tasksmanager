@@ -10,7 +10,6 @@ const TodoPopup = ({
 }) => {
   const [listOfItems, setlistOfItemss] = useState(todos ? todos : []);
   const handleEditTodoItem = (event) => {
-    console.log(`event  summary`, event);
     event.preventDefault();
     let newToDo = {
       title: event.target.title.value ? event.target.title.value : "",
@@ -70,7 +69,8 @@ const TodoPopup = ({
             >
               Summary *
             </label>
-            <input
+            <textarea
+              maxlength="50"
               required
               type="text"
               className={clsx(
